@@ -13,20 +13,29 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault()  // Prevent page reload
     setIsLoading(true)
     
-    const formData = new FormData(e.currentTarget)
-    const result = await signIn(formData)
+    const formData = new FormData(e.currentTarget) 
+    const result = await signIn(formData)   // Call Server Action (runs on server)
     
+     // If error returned, show toast and re-enable form
     if (result?.error) {
       toast.error('Error', {
         description: result.error,
       })
-      setIsLoading(false)
+      setIsLoading(false) // If success, Server Action redirects to dashboard
     }
   }
 
+  /**
+   * Flow:
+   * 1. Set loading state
+   * 2. Call signInWithGoogle Server Action
+   * 3. Server Action redirects to Google
+   * 4. User authenticates with Google
+   * 5. Returns to /auth/callback
+   */
   // async function handleGoogleSignIn() {
   //   setIsLoading(true)
   //   const result = await signInWithGoogle()
