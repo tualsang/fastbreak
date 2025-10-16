@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn, } from '@/app/actions/auth'    // remove signInWithGoogle
+import { signIn } from '@/app/actions/auth'
+// import { signInWithGoogle } from '@/app/actions/auth' // Uncomment to enable Google OAuth
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,33 +14,25 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()  // Prevent page reload
+    e.preventDefault()
     setIsLoading(true)
     
-    const formData = new FormData(e.currentTarget) 
-    const result = await signIn(formData)   // Call Server Action (runs on server)
+    const formData = new FormData(e.currentTarget)
+    const result = await signIn(formData)
     
-     // If error returned, show toast and re-enable form
     if (result?.error) {
       toast.error('Error', {
         description: result.error,
       })
-      setIsLoading(false) // If success, Server Action redirects to dashboard
+      setIsLoading(false)
     }
   }
 
-  /**
-   * Flow:
-   * 1. Set loading state
-   * 2. Call signInWithGoogle Server Action
-   * 3. Server Action redirects to Google
-   * 4. User authenticates with Google
-   * 5. Returns to /auth/callback
-   */
+  // Uncomment to enable Google OAuth
   // async function handleGoogleSignIn() {
   //   setIsLoading(true)
   //   const result = await signInWithGoogle()
-    
+  //   
   //   if (result?.error) {
   //     toast.error('Error', {
   //       description: result.error,
@@ -85,7 +78,8 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="relative my-4">
+          {/* Uncomment to enable Google OAuth */}
+          {/* <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
@@ -100,7 +94,7 @@ export default function LoginPage() {
             type="button"
             variant="outline"
             className="w-full"
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             disabled={isLoading}
           >
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -122,11 +116,11 @@ export default function LoginPage() {
               />
             </svg>
             Continue with Google
-          </Button>
+          </Button> */}
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/signup" className="font-medium text-primary hover:underline">
               Sign up
             </Link>
