@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { signUp, signInWithGoogle } from '@/app/actions/auth'
+import { signUp } from '@/app/actions/auth' // removed: signInWithGoogle
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -31,17 +31,17 @@ export default function SignUpPage() {
     }
   }
 
-  async function handleGoogleSignIn() {
-    setIsLoading(true)
-    const result = await signInWithGoogle()
+  // async function handleGoogleSignIn() {
+  //   setIsLoading(true)
+  //   const result = await signInWithGoogle()
     
-    if (result?.error) {
-      toast.error('Error', {
-        description: result.error,
-      })
-      setIsLoading(false)
-    }
-  }
+  //   if (result?.error) {
+  //     toast.error('Error', {
+  //       description: result.error,
+  //     })
+  //     setIsLoading(false)
+  //   }
+  // }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
@@ -97,7 +97,7 @@ export default function SignUpPage() {
             type="button"
             variant="outline"
             className="w-full"
-            onClick={handleGoogleSignIn}
+            // onClick={handleGoogleSignIn}
             disabled={isLoading}
           >
             <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
