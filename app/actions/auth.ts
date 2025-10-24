@@ -1,15 +1,6 @@
 /**
  * Authentication Server Actions
  * 
- * This file contains all server-side authentication operations.
- * Server Actions run on the server and can be called from Client Components.
- * 
- * Benefits of Server Actions:
- * - Automatic POST request handling
- * - Type-safe by default
- * - No need to create API routes
- * - Progressive enhancement support
- * 
  * All functions in this file are marked with 'use server' to indicate
  * they run on the server, not in the browser.
  */
@@ -22,9 +13,6 @@ import { redirect } from 'next/navigation'
 
 /**
  * Sign Up Action
- * Creates a new user account with email and password
- * 
- * Flow:
  * 1. Extract email and password from form data
  * 2. Call Supabase signUp with credentials
  * 3. Set up email redirect for confirmation
@@ -74,9 +62,6 @@ export async function signUp(formData: FormData) {
 
 /**
  * Sign In Action
- * Authenticates an existing user with email and password
- * 
- * Flow:
  * 1. Extract email and password from form data
  * 2. Call Supabase signInWithPassword
  * 3. Revalidate cache and redirect to dashboard on success
@@ -84,11 +69,6 @@ export async function signUp(formData: FormData) {
  * 
  * @param formData - Form data containing email and password
  * @returns Error object if login fails, otherwise redirects
- * 
- * Security Note:
- * - Password is never exposed to the client
- * - Authentication happens entirely on the server
- * - Session cookies are httpOnly and secure
  */
 export async function signIn(formData: FormData) {
   const supabase = await createClient()
@@ -117,19 +97,11 @@ export async function signIn(formData: FormData) {
 
 /**
  * Sign Out Action
- * Logs out the current user and clears their session
- * 
- * Flow:
- * 1. Call Supabase signOut to clear session
+* 1. Call Supabase signOut to clear session
  * 2. Revalidate cache to remove user data
  * 3. Redirect to login page
  * 
  * @returns Error object if logout fails, otherwise redirects
- * 
- * Security Note:
- * - Clears all session cookies
- * - Invalidates refresh tokens
- * - User must re-authenticate to access protected routes
  */
 export async function signOut() {
   const supabase = await createClient()
@@ -152,9 +124,6 @@ export async function signOut() {
 // Uncomment to enable Google OAuth
 /**
  * Google OAuth Sign In Action
- * Initiates Google OAuth authentication flow
- * 
- * Flow:
  * 1. Request OAuth URL from Supabase
  * 2. Supabase generates authorization URL with Google
  * 3. User is redirected to Google login
@@ -167,8 +136,6 @@ export async function signOut() {
  * 1. Enable Google provider in Supabase dashboard
  * 2. Configure OAuth credentials in Google Cloud Console
  * 3. Add authorized redirect URI: https://your-project.supabase.co/auth/v1/callback
- * 
- * Note: The redirect URL must match what's configured in Supabase
  */
 // export async function signInWithGoogle() {
 //   const supabase = await createClient()

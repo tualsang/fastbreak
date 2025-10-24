@@ -1,6 +1,5 @@
 /**
  * Middle Ware for Route Protection
- * 
  * 1. Refresh Supabase autentication
  * 2. Protect routes that require autentication
  * 3. Redirect unautenticated users to login
@@ -83,6 +82,7 @@ export async function middleware(request: NextRequest) {
   return supabaseResponse // return with updated Cookies.
 }
 
+// This was suggested by AI, this matcher excludes image files, static files, so it runs faster.
 export const config = {
   matcher: [
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',

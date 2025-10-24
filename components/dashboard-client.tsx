@@ -192,21 +192,24 @@ export function DashboardClient({ initialEvents, user }: DashboardClientProps) {
                     </div>
                   )}
 
-                  <div className="flex gap-2 pt-2">
-                    <Link href={`/events/edit/${event.id}`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Pencil className="mr-2 h-3 w-3" />
-                        Edit
+                  {/* Only show Edit/Delete buttons if user owns the event */}
+                  {event.user_id === user.id && (
+                    <div className="flex gap-2 pt-2">
+                      <Link href={`/events/edit/${event.id}`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Pencil className="mr-2 h-3 w-3" />
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => handleDelete(event.id, event.name)}
+                      >
+                        <Trash2 className="h-3 w-3" />
                       </Button>
-                    </Link>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleDelete(event.id, event.name)}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
-                  </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
