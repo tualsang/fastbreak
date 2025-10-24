@@ -33,7 +33,7 @@ Think of it as a centralized hub for organizing sports events - similar to how y
 
 ## Try It Yourself
 
-### **Option 1: Use the Live Demo**
+### **Use the Live Demo**
 
 1. Visit: [https://fastbreak-two.vercel.app](https://fastbreak-two.vercel.app)
 2. Click **"Sign up"** and create a test account
